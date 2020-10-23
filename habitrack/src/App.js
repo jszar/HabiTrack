@@ -6,20 +6,15 @@ function App() {
     <div>
       <h1>HabiTracker</h1>
       <br/>
-      <h1>Add Habit</h1>
+      <h1>Add User</h1>
       <form action="">
-        <label for="hname">Habit name: </label>
-        <input type="text" id="hname" name="hname"></input><br/><br/>
-        <label for="desc">Description: </label>
-        <input type="text" id="desc" name="desc"></input><br/><br/>
-        <label for="priority">Choose Priotiy: </label>
-        <input list="priority"></input>
-        <datalist id="priority">
-          <option value="1"></option>
-          <option value="2"></option>
-          <option value="3"></option>
-        </datalist>
-        <br/><br/>
+        <label for="hname">User name: </label>
+        <input type="text" id="uname" name="uname"></input><br/><br/>
+        <label for="password">Password: </label>
+        <input type="text" id="password" name="password"></input><br/><br/>
+        <label for="conpassword">Confirm Password: </label>
+        <input type="text" id="conpassword" name="conpassword"></input><br/><br/>
+        <br/>
         <input type="submit" value="Submit"></input>
       </form>
     </div>
