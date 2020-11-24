@@ -9,7 +9,7 @@ try:
     cursor = cnx.cursor()
 
     #Simple query
-    query = "SELECT * FROM Users;"
+    query = "SELECT username FROM Users;"
     cursor.execute(query)
 
     #Print results

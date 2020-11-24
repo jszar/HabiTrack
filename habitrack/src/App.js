@@ -45,6 +45,11 @@ class App extends Component {
             else
             {
                 this.setState({alert: "Password successfully confirmed!"});
+                //let url = 'http://localhost:5000/api/getUsers';
+                //fetch(url).then(function(response){
+                    
+                //}) 
+                
             }
         }
     }
