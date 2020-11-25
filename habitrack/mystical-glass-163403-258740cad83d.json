@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "mystical-glass-163403",
+  "private_key_id": "258740cad83d734c2fa8eb233901b8e6ca26dd7f",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQC/zXkkf4OOQReL\neCD28j5WLsEDat/aKFL/GHVgxbQxfCRXLohcqoI7Q2df5BHS6MCmUG8I+XzyTOp2\nX2N1q+/cUzj1FQ4a0di2RqE4LcDHp7LMYBkG1jGymdl+kNkjqnbaEt3QhZpJQ5PQ\nGmWqZCsh24RnWEmlKK8eODv2eLwCKV91hZsPK84AoW1KexdbwZaxt34qVw9tU5qs\nWlbcui6hEVRpBY02vgBsr7MX0SsZSTkJY+t7ZYQH/8iKncs0bLOnXFMcEI9XUyTL\nBV/vq4T9Er+maxYUfS4ejnCm3HIQrU6O8bL/sUY2asDN7O+yfd5D+f06O5KD4EiM\nYCwVLTm1AgMBAAECggEABwwCSP4BOKc1Aq05Ex4yfh9B6rzw6x1uu8cwINVeIwvf\n4VyyKr1r3qOK6Xsmq+xcaxIq5HrOINTgC0NVEyeQvusitCjABXyFsalO8jcGaOrp\nsBhRfDfRkZ9MAtEkcA9z/QCTBXWOmFNcSVnIE0+SjrAJ4XPdGNHojldAlL05/o0h\nWIZVb3dMFA9UwTACkZinhZhy5O3WC/kPfTfivPFB6AAj9Fbdl0Vk92ZKBYt5p3O2\n/pfOp/Zpibn4vm2uwJjOTGUTdIy9spo7WxE0pR/yalkfiFgjxiGFgLgUlj0rh3E8\n3q8cAYgSasjHQpQgQWZ+OuUinWZI8FZJ6hRu1ep5zQKBgQD4CiGapeJJ5aHY4ewo\n4KeQ5nPcLjo0ZGXsHZNm8YIs0inZq1TR88ZjGHvHPYyrg2mVS4ns9Byjqb6ydpqb\nmAX1NdfXraxcGnd3aKQqMy2CJ2JE3gXTd+3psyx1/9F1ry0lXJBlAlqShSyG6aw2\nB8u1OE8gWOXMd7rIab5osH+/EwKBgQDF9U4DWUbUoGpAjx3CMBfK5bXT3mrxDEYP\nN53jPVfAbNu6eytTAl9m3sEc+WlijZJno40Zc5fg8h6ekFwgA11eXu7FaHJzbs4S\nrJN0CMQb1XMpYlluWw0YpsC41nTbuLToRlrh7qDH9ChN+m6wDq1mbRPCn5hiXFzK\nMz3NaS+VFwKBgQCr+WJJNiCKOeOYWzQBN5oWtiG4lHiYoM+mAO+VXXdzGhgYKll5\n5Do1tOEFSGCC/m8zKxerKam9s9BbLi6OGL5wwG8xw+GQTm1sZioEdE1mQ2Y393Q0\npZ9X/HmkKsWQge+cSux2jEY99oXj2JolMAyGTk9WTyytMopXsDFrpow77wKBgQCF\nO9X24QaQIyuAKhLgWNgaokKfx4n4lMcuhMNKZ0YBaAL3XuDI7MbjCLe21ZL9VsWb\n5XMZFzi4mJzNIeIvVbRoyMIxsVuen4wo+2f+58t95EqvJteEM9n7pnf9r7FVFNsF\nnhybBa3HBmh+GziWXDqOvolXK203fmyhVp2Y+9ufnwKBgQCI0FPv42dNL4Rw378k\nW3IA7fXsT8dbqb0PQmhMoqy+bFd7r8Ml3ZAltAlUSejLqmxL9TA5jHo3q7HQW+R8\nM85zMDxi850PDwN1LnSLrKDxKOYbyQJQBYXNRxPo/RSXZasMfT6jRwQxEwijgr0h\njbbjcXk2D99W5subJQCPfNWFTQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "habitracker-service-account@mystical-glass-163403.iam.gserviceaccount.com",
+  "client_id": "113626832314257250855",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/habitracker-service-account%40mystical-glass-163403.iam.gserviceaccount.com"
+}

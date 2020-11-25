@@ -31,6 +31,9 @@ class App extends Component {
         if (this.state.name == "" || this.state.pass == "" || this.state.conpass == "")
         {
             this.setState({alert: "You've forgotten to fill a form out. Please do that."});
+            let user = 'franky';
+            let url = 'http://localhost:3001/api/test' + '?tagId=' + user;
+            fetch(url).then(response => response.text()).then(data => console.log(data))
         }
         else if (this.state.pass != this.state.conpass)
         {
@@ -45,10 +48,6 @@ class App extends Component {
             else
             {
                 this.setState({alert: "Password successfully confirmed!"});
-                //let url = 'http://localhost:5000/api/getUsers';
-                //fetch(url).then(function(response){
-                    
-                //}) 
                 
             }
         }
