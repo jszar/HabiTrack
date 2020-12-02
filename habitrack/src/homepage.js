@@ -54,9 +54,22 @@ import React, {Component} from 'react';
     render()
     {
         return (
-            <div>
-                <h1>HabiTracker Homepage</h1>
+          <div>
+            <div class="container" align="center">
+              <div class="row">
+                <div class="col-sm-12">
+                  <h1>HabiTracker Homepage</h1>
+                </div>
+              </div>
             </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-12">
+                  <h1>Daily</h1>
+                </div>
+              </div>
+            </div>
+          </div>
         );
     }
 }

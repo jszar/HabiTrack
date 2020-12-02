@@ -51,34 +51,35 @@ import logo from './logo.svg';
             else
             {
                 this.setState({alert: "Password successfully confirmed!"});
-                
+
             }
         }
     }
     render()
     {
         return (
-            <div>
+            <div align="center">
                 <h1>HabiTracker</h1>
+                <br/>
                 <br/>
                 <h1>Add User</h1>
                 <form action="">
-                    <label for="hname">User name: </label>
-                    <input type="text" id="uname" name="uname" value={this.state.name} onChange=
+                    <label for="hname"></label>
+                    <input type="text" placeholder="Username" id="uname" name="uname" value={this.state.name} onChange=
                         {this.updateName}></input><br/><br/>
-                    <label for="password">Password: </label>
-                    <input type="password" id="password" name="password" value={this.state.pass} onChange=
+                    <label for="password"></label>
+                    <input type="password" placeholder="Password" id="password" name="password" value={this.state.pass} onChange=
                         {this.updatePass}></input><br/><br/>
-                    <label for="conpassword">Confirm Password: </label>
-                    <input type="password" id="conpassword" name="conpassword" value={this.state.conpass} onChange=
+                    <label for="conpassword"></label>
+                    <input type="password" placeholder="Confirm Password" id="conpassword" name="conpassword" value={this.state.conpass} onChange=
                         {this.updateConpass}></input><br/><br/>
                     <br/>
-                    <button onClick={(e) => {this.createUser(e)}}>Submit</button>
+                    <button class="btn btn-primary" onClick={(e) => {this.createUser(e)}}>Submit</button>
                 </form>
                 <br/>
                 <a href='http://localhost:3000/'>Already have an account? Login here</a>
                 <h3 style={{color: "red"}} >{this.state.alert}</h3>
-            </div> 
+            </div>
         );
     }
 }

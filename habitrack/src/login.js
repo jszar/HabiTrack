@@ -32,7 +32,7 @@ import logo from './logo.svg';
             //fetch(url).then(response => response.text()).then(data => console.log(data))
             //window.location = 'http://localhost:3000/homepage'
         }else
-        {  
+        {
             let url = 'http://localhost:3001/api/login' + '?tagId=' + this.state.name + '&tagId2=' + this.state.pass;
             fetch(url).then(function(response){
                 return response.text();
@@ -50,24 +50,25 @@ import logo from './logo.svg';
     render()
     {
         return (
-            <div>
-                <h1>HabiTracker</h1>
+            <div align="center">
+                <h1>Welcome to HabiTracker!</h1>
+                <br/>
                 <br/>
                 <h1>Login</h1>
                 <form action="">
-                    <label for="hname">User name: </label>
-                    <input type="text" id="uname" name="uname" value={this.state.name} onChange=
+                    <label for="hname"></label>
+                    <input type="text" placeholder="Username" id="uname" name="uname" value={this.state.name} onChange=
                         {this.updateName}></input><br/><br/>
-                    <label for="password">Password: </label>
-                    <input type="password" id="password" name="password" value={this.state.pass} onChange=
+                    <label for="password"></label>
+                    <input type="password" placeholder="Password" id="password" name="password" value={this.state.pass} onChange=
                         {this.updatePass}></input><br/><br/>
                     <br/>
-                    <button onClick={(e) => {this.createUser(e)}}>Submit</button>
+                    <button class="btn btn-primary" onClick={(e) => {this.createUser(e)}}>Submit</button>
                 </form>
                 <br/>
                 <a href='http://localhost:3000/signup'>Don't have an account? Make one</a>
                 <h3 style={{color: "red"}} >{this.state.alert}</h3>
-            </div> 
+            </div>
         );
     }
 }
