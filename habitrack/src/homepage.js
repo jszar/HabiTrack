@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
-import signup from './signup.js'
-import login from './login.js'
-import homepage from './homepage.js'
-import './App.css';
+import logo from './logo.svg';
+//import './App.css';
 
   class App extends Component {
     constructor() {
@@ -37,7 +34,6 @@ import './App.css';
             let user = 'franky';
             let url = 'http://localhost:3001/api/test' + '?tagId=' + user;
             fetch(url).then(response => response.text()).then(data => console.log(data))
-            window.location = 'http://localhost:3000/homepage'
         }
         else if (this.state.pass != this.state.conpass)
         {
@@ -59,13 +55,9 @@ import './App.css';
     render()
     {
         return (
-           <Router>
-           <div className="container">
-             <Route exact path='/' component={login}/>
-             <Route path='/signup' component={signup}/>
-             <Route path='/homepage' component={homepage}/>
-           </div>
-            </Router>  
+            <div>
+                <h1>HabiTracker Homepage</h1>
+            </div>
         );
     }
 }

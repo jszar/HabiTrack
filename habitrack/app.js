@@ -56,3 +56,19 @@ app.get('/api/test', function(req, res){
   })
     
 })
+
+app.get('/api/login', function(req, res){
+  let user = req.query.tagId;
+  let pass = req.query.tagId2;
+  
+  connection.query('SELECT password_hash FROM Users WHERE username=?', user, (err, rows) => {
+    if (err) throw err;
+
+    if(pass == rows[0].password_hash){
+      res.send('1');
+    }else{
+      res.send('0');
+    }
+  })
+    
+})
