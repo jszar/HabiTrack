@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 //import './App.css';
 
   class App extends Component {
@@ -48,7 +47,7 @@ import logo from './logo.svg';
             else
             {
                 this.setState({alert: "Password successfully confirmed!"});
-                
+
             }
         }
     }
