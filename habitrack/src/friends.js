@@ -12,8 +12,8 @@ import './topnav.css'
         return (
             <div>
             <div class="topnav">
-              <a class="active" href="#homepage">Home</a>
-              <a href="friends">Friends</a>
+              <a href="homepage">Home</a>
+              <a class="active" href="friends">Friends</a>
               <a href="/">Sign Out</a>
             </div>
                 <h1>Friends Page</h1>

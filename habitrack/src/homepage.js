@@ -57,7 +57,7 @@ import './topnav.css'
         return (
           <div>
             <div class="topnav">
-              <a class="active" href="#homepage">Home</a>
+              <a class="active" href="homepage">Home</a>
               <a href="friends">Friends</a>
               <a href="/">Sign Out</a>
             </div>
