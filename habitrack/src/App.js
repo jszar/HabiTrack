@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 import signup from './signup.js'
 import login from './login.js'
 import homepage from './homepage.js'
+import stats from './stats.js'
 import friends from './friends.js'
 import './App.css';
 
@@ -64,6 +65,7 @@ import './App.css';
              <Route exact path='/' component={login}/>
              <Route path='/signup' component={signup}/>
              <Route path='/homepage' component={homepage}/>
+             <Route path='/stats' component={stats}/>
              <Route path='/friends' component={friends}/>
            </div>
             </Router>

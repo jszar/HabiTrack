@@ -13,12 +13,12 @@ import './topnav.css'
             <div>
             <div class="topnav">
               <a href="homepage">Home</a>
-              <a href="stats">Stats</a>
-              <a class="active" href="friends">Friends</a>
+              <a class="active" href="stats">Stats</a>
+              <a href="friends">Friends</a>
               <a href="/">Sign Out</a>
             </div>
-                <h1>Friends Page</h1>
-                  <p>so lonely :(</p>
+                <h1>Stats Page</h1>
+                  <p>Just...be...patient...</p>
             </div>
         );
     }
