@@ -46,13 +46,13 @@ app.listen(3001, err => {
 });
 
 
-app.get('/api/test', function(req, res){
+app.get('/api/signup', function(req, res){
   let user = req.query.tagId;
-  connection.query('SELECT username FROM Users WHERE username=?', user, (err, rows) => {
+  let pass = req.query.tagId2;
+  var insert = 'INSERT INTO Users (username, password_hash) VALUES (\'' + user + '\', \'' + pass + '\')'
+  connection.query(insert, (err, rows) => {
     if (err) throw err;
-    console.log(rows[0].username);
-    res.send(rows[0].username);
-    //return rows;
+    res.send('1');
   })
     
 })
