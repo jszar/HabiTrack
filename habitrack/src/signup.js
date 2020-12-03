@@ -33,10 +33,6 @@ import logo from './logo.svg';
         if (this.state.name == "" || this.state.pass == "" || this.state.conpass == "")
         {
             this.setState({alert: "You've forgotten to fill a form out. Please do that."});
-            let user = 'franky';
-            let url = 'http://localhost:3001/api/test' + '?tagId=' + user;
-            fetch(url).then(response => response.text()).then(data => console.log(data))
-            window.location = 'http://localhost:3000/homepage'
         }
         else if (this.state.pass != this.state.conpass)
         {
@@ -50,8 +46,20 @@ import logo from './logo.svg';
             }
             else
             {
-                this.setState({alert: "Password successfully confirmed!"});
+                let url = 'http://localhost:3001/api/signup' + '?tagId=' + this.state.name + '&tagId2=' + this.state.pass;
+                localStorage.setItem('currentuser',this.state.name);
 
+                fetch(url).then(function(response){
+                    return response.text();
+                }).then(function(data){
+                    if(data == '1'){
+                        window.location = 'http://localhost:3000/homepage';
+                    }else{
+                        localStorage.setItem('currentuser','');
+                    }
+                }).catch(function(error){
+                    console.error();
+                })
             }
         }
     }

@@ -13,6 +13,7 @@ import './topnav.css'
             <div>
             <div class="topnav">
               <a href="homepage">Home</a>
+              <a href="stats">Stats</a>
               <a class="active" href="friends">Friends</a>
               <a href="/">Sign Out</a>
             </div>
