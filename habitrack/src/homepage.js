@@ -70,8 +70,50 @@ import './topnav.css'
             </div>
             <div class="container">
               <div class="row">
-                <div class="col-sm-12">
-                  <h1>Daily</h1>
+                <div class="col-sm-4">
+                  <div class="row text-center py-4 align-content-between flex-wrap">
+                    <div class="col-sm-3 d-flex justify-content-center align-items-center">
+                    </div>
+                    <div class="col-sm-3 d-flex justify-content-center align-items-center">
+                      <h1>Daily</h1>
+                    </div>
+                    <div class="col-sm-3 d-flex justify-content-center align-items-center">
+                      <button class="btn btn-primary">Add Category</button>
+                    </div>
+                    <div class="col-sm-3 d-flex justify-content-center align-items-center">
+                    </div>
+                    <br/>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="row text-center py-4 align-content-between flex-wrap">
+                    <div class="col-sm-3 d-flex justify-content-center align-items-center">
+                    </div>
+                    <div class="col-sm-3 d-flex justify-content-center align-items-center">
+                      <h1>Weekly</h1>
+                    </div>
+                    <div class="col-sm-3 d-flex justify-content-center align-items-center">
+                      <button class="btn btn-primary">Add Category</button>
+                    </div>
+                    <div class="col-sm-3 d-flex justify-content-center align-items-center">
+                    </div>
+                    <br/>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="row text-center py-4 align-content-between flex-wrap">
+                    <div class="col-sm-3 d-flex justify-content-center align-items-center">
+                    </div>
+                    <div class="col-sm-3 d-flex justify-content-center align-items-center">
+                      <h1>Monthly</h1>
+                    </div>
+                    <div class="col-sm-3 d-flex justify-content-center align-items-center">
+                      <button class="btn btn-primary">Add Category</button>
+                    </div>
+                    <div class="col-sm-3 d-flex justify-content-center align-items-center">
+                    </div>
+                    <br/>
+                  </div>
                 </div>
               </div>
             </div>
