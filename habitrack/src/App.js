@@ -53,7 +53,6 @@ import './App.css';
             else
             {
                 this.setState({alert: "Password successfully confirmed!"});
-
             }
         }
     }

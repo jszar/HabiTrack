@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './topnav.css'
-//import './App.css';
+var user = localStorage.getItem('currentuser');
 
   class App extends Component {
     constructor() {
