@@ -84,6 +84,20 @@ import './topnav.css'
                     </div>
                     <br/>
                   </div>
+
+                  <div class="row text-center py-4 align-content-between flex-wrap">
+                  <div class="col-sm-2">
+                  </div>
+                  <div class="col-sm-8 d-flex justify-content-center align-items-center">
+                    <select class="form-control">
+                      <option value="" disabled selected>Select Category</option>
+                      <option value="temp">Temp</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-2">
+                  </div>
+                  </div>
+
                 </div>
                 <div class="col-sm-4">
                   <div class="row text-center py-4 align-content-between flex-wrap">
@@ -99,6 +113,20 @@ import './topnav.css'
                     </div>
                     <br/>
                   </div>
+
+                  <div class="row text-center py-4 align-content-between flex-wrap">
+                  <div class="col-sm-2">
+                  </div>
+                  <div class="col-sm-8 d-flex justify-content-center align-items-center">
+                    <select class="form-control">
+                      <option value="" disabled selected>Select Category</option>
+                      <option value="temp">Temp</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-2">
+                  </div>
+                  </div>
+
                 </div>
                 <div class="col-sm-4">
                   <div class="row text-center py-4 align-content-between flex-wrap">
@@ -110,10 +138,24 @@ import './topnav.css'
                     <div class="col-sm-3 d-flex justify-content-center align-items-center">
                       <button class="btn btn-primary">Add Category</button>
                     </div>
-                    <div class="col-sm-3 d-flex justify-content-center align-items-center">
+                      <div class="col-sm-3 d-flex justify-content-center align-items-center">
                     </div>
                     <br/>
                   </div>
+
+                  <div class="row text-center py-4 align-content-between flex-wrap">
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-8 d-flex justify-content-center align-items-center">
+                      <select class="form-control">
+                        <option value="" disabled selected>Select Category</option>
+                        <option value="temp">Temp</option>
+                      </select>
+                    </div>
+                    <div class="col-sm-2">
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
