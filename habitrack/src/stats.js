@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import './topnav.css'
+var user = localStorage.getItem('currentuser');
 //import './App.css';
 
   class App extends Component {
     constructor() {
         super();
     }
-
     render()
     {
         return (
@@ -19,6 +19,7 @@ import './topnav.css'
             </div>
                 <h1>Stats Page</h1>
                   <p>Just...be...patient...</p>
+                  <h3>STATS FOR: {user}</h3>
             </div>
         );
     }
