@@ -17,15 +17,6 @@ connection.connect(function(err){
   console.log('Connected!')
 });
 
-  /*
-  function getUsers(){
-    connection.query('SELECT username FROM Users;', function(err, rows, fields){
-      if (err) throw err;
-      console.log(rows[0].username);
-      return rows;
-    })
-  }
-  */
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
@@ -54,7 +45,6 @@ app.get('/api/signup', function(req, res){
     if (err) throw err;
     res.send('1');
   })
-    
 })
 
 app.get('/api/login', function(req, res){
@@ -69,6 +59,37 @@ app.get('/api/login', function(req, res){
     }else{
       res.send('0');
     }
-  })
-    
+  })  
+})
+
+app.get('/api/getUID', function(req, res){
+  let user = req.query.tagId;
+  
+  connection.query('SELECT uID FROM Users WHERE username=?', user, (err, rows) => {
+    if (err) throw err;
+    var uid = rows[0].uID.toString();
+    res.send(uid);
+  })  
+})
+
+app.get('/api/addCategory', function(req, res){
+  let user = req.query.tagId;
+  let cat = req.query.tagId2;
+  let type = req.query.tagId3;
+
+  var insert = 'INSERT INTO Categories (uID, name, type) VALUES (\'' + user + '\', \'' + cat + '\', \'' + type + '\')'
+  connection.query(insert, (err, rows) => {
+    if (err) throw err;
+    res.send('1');
+  })  
+})
+
+app.get('/api/getCategories', function(req, res){
+  let user = req.query.tagId;
+  
+  var insert = 'SELECT name, type FROM Categories WHERE uID=' + user;
+  connection.query(insert, (err, rows) => {
+    if (err) throw err;
+    res.json(rows);
+  })  
 })

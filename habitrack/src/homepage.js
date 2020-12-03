@@ -3,23 +3,107 @@ import './topnav.css'
 import './modal.css'
 import Popup from "reactjs-popup";
 var user = localStorage.getItem('currentuser');
-//import './App.css';
+let uid = getUserID(user);
+
+function getUserID(username){
+  let url = 'http://localhost:3001/api/getUID' + '?tagId=' + user;
+  fetch(url).then(function(response){
+    return response.text();
+  }).then(function(data){
+    let uid = parseInt(data, 10);
+    localStorage.setItem('currentuserID', data);
+    getCategories();
+  }).catch(function(error){
+    console.error();
+  })
+}
+
+function getCategories(){
+  var uid = localStorage.getItem('currentuserID');
+  let url = 'http://localhost:3001/api/getCategories' + '?tagId=' + uid;
+  
+  fetch(url).then(function(response){
+    return response.text();
+  }).then(function(data){
+    
+    let cats = data.split('},');
+    
+    for(let i = 0; i < cats.length; i++){
+      console.log(cats[i])
+      let split = cats[i].indexOf('\",\"');
+      let name = cats[i].substring(9, split);
+      let type = cats[i].substring(split+10, cats[i].lastIndexOf('\"'));
+      if(i == 0){
+        name = name.substring(1);
+      }
+
+      if(type == 'Daily'){
+        var x = document.getElementById("dailyCategories")
+        var option = document.createElement("option");
+        option.value = name;
+        option.text = name;
+        x.add(option);
+      }else if(type == 'Weekly'){
+        var x = document.getElementById("weeklyCategories")
+        var option = document.createElement("option");
+        option.value = name;
+        option.text = name;
+        x.add(option);
+      }else if(type == 'Monthly'){
+        var x = document.getElementById("monthlyCategories")
+        var option = document.createElement("option");
+        option.value = name;
+        option.text = name;
+        x.add(option);
+      }
+
+      
+    }
+  }).catch(function(error){
+    console.error();
+  })
+}
 
 function addCategoryDaily(category){
   var x = document.getElementById("dailyCategories")
   var option = document.createElement("option");
   option.value = category;
   option.text = category
-  console.log(category);
   x.add(option);
+  
+  var uid = localStorage.getItem('currentuserID');
+  let url = 'http://localhost:3001/api/addCategory' + '?tagId=' + uid + '&tagId2=' + category + '&tagId3=' + 'Daily';
+  
+  fetch(url).then(function(response){
+    return response.text();
+  }).then(function(data){
+    if(data == 1){
+      console.log('OK');
+    }
+  }).catch(function(error){
+    console.error();
+  })
 }
+
 function addCategoryWeekly(category){
   var x = document.getElementById("weeklyCategories")
   var option = document.createElement("option");
   option.value = category;
   option.text = category
-  console.log(category);
   x.add(option);
+
+  var uid = localStorage.getItem('currentuserID');
+  let url = 'http://localhost:3001/api/addCategory' + '?tagId=' + uid + '&tagId2=' + category + '&tagId3=' + 'Weekly';
+  
+  fetch(url).then(function(response){
+    return response.text();
+  }).then(function(data){
+    if(data == 1){
+      console.log('OK');
+    }
+  }).catch(function(error){
+    console.error();
+  })
 }
 
 function addCategoryMonthly(category){
@@ -27,60 +111,23 @@ function addCategoryMonthly(category){
   var option = document.createElement("option");
   option.value = category;
   option.text = category
-  console.log(category);
   x.add(option);
+
+  var uid = localStorage.getItem('currentuserID');
+  let url = 'http://localhost:3001/api/addCategory' + '?tagId=' + uid + '&tagId2=' + category + '&tagId3=' + 'Monthly';
+  
+  fetch(url).then(function(response){
+    return response.text();
+  }).then(function(data){
+    if(data == 1){
+      console.log('OK');
+    }
+  }).catch(function(error){
+    console.error();
+  })
 }
 
   class App extends Component {
-    constructor() {
-        super();
-        this.state = {
-            name: '',
-            pass: '',
-            conpass: '',
-            alert: ''
-        };
-        this.updateName = this.updateName.bind(this);
-        this.updatePass = this.updatePass.bind(this);
-        this.updateConpass = this.updateConpass.bind(this);
-        this.createUser = this.createUser.bind(this);
-    }
-    updateName(e) {
-        this.setState({name: e.target.value});
-    }
-    updatePass(e) {
-        this.setState({pass: e.target.value});
-    }
-    updateConpass(e) {
-        this.setState({conpass: e.target.value});
-    }
-    createUser = (e) => {
-        e.preventDefault();
-        console.log(this.state.name, this.state.pass, this.state.conpass);
-        if (this.state.name == "" || this.state.pass == "" || this.state.conpass == "")
-        {
-            this.setState({alert: "You've forgotten to fill a form out. Please do that."});
-            let user = 'franky';
-            let url = 'http://localhost:3001/api/test' + '?tagId=' + user;
-            fetch(url).then(response => response.text()).then(data => console.log(data))
-        }
-        else if (this.state.pass != this.state.conpass)
-        {
-            this.setState({alert: "Your passwords don't match. Please reconfirm your password"});
-        }
-        else
-        {
-            if ((this.state.pass).length < 8)
-            {
-                this.setState({alert: "Password too short. Please have a password of at least 8 characters."});
-            }
-            else
-            {
-                this.setState({alert: "Password successfully confirmed!"});
-
-            }
-        }
-    }
     render()
     {
         return (
@@ -130,8 +177,7 @@ function addCategoryMonthly(category){
                     </div>
                     <div class="col-sm-8 d-flex justify-content-center align-items-center">
                       <select id="dailyCategories" class="form-control">
-                        <option value="" disabled selected>Select Category</option>
-                        <option value="temp">Temp</option>
+                        <option value="" disabled selected>Select Category</option>                      
                       </select>
                     </div>
                     <div class="col-sm-2">
@@ -171,7 +217,6 @@ function addCategoryMonthly(category){
                     <div class="col-sm-8 d-flex justify-content-center align-items-center">
                       <select id="weeklyCategories" class="form-control">
                         <option value="" disabled selected>Select Category</option>
-                        <option value="temp">Temp</option>
                       </select>
                     </div>
                     <div class="col-sm-2">
@@ -209,7 +254,6 @@ function addCategoryMonthly(category){
                     <div class="col-sm-8 d-flex justify-content-center align-items-center">
                       <select id="monthlyCategories" class="form-control">
                         <option value="" disabled selected>Select Category</option>
-                        <option value="temp">Temp</option>
                       </select>
                     </div>
                     <div class="col-sm-2">
