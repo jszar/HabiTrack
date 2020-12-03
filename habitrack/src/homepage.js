@@ -1,6 +1,34 @@
 import React, {Component} from 'react';
 import './topnav.css'
+import './modal.css'
+import Popup from "reactjs-popup";
 //import './App.css';
+
+function addCategoryDaily(category){
+  var x = document.getElementById("dailyCategories")
+  var option = document.createElement("option");
+  option.value = category;
+  option.text = category
+  console.log(category);
+  x.add(option);
+}
+function addCategoryWeekly(category){
+  var x = document.getElementById("weeklyCategories")
+  var option = document.createElement("option");
+  option.value = category;
+  option.text = category
+  console.log(category);
+  x.add(option);
+}
+
+function addCategoryMonthly(category){
+  var x = document.getElementById("monthlyCategories")
+  var option = document.createElement("option");
+  option.value = category;
+  option.text = category
+  console.log(category);
+  x.add(option);
+}
 
   class App extends Component {
     constructor() {
@@ -78,7 +106,17 @@ import './topnav.css'
                       <h1>Daily</h1>
                     </div>
                     <div class="col-sm-3 d-flex justify-content-center align-items-center">
-                      <button class="btn btn-primary">Add Category</button>
+                    <Popup id="popup1" trigger={<button class="btn btn-primary" id="dailyCat">Add Category</button>} modal>
+                    {close => (
+                      <div>
+                        <input placeholder="New Category" type="text" id="categoryD" name="category"></input>
+                        <br/>
+                        <br/>
+                        <button class="btn btn-primary" onClick={() => addCategoryDaily(document.getElementById("categoryD").value)}>Submit</button>
+                      </div>
+                    )}
+                    </Popup>
+
                     </div>
                     <div class="col-sm-3 d-flex justify-content-center align-items-center">
                     </div>
@@ -86,17 +124,19 @@ import './topnav.css'
                   </div>
 
                   <div class="row text-center py-4 align-content-between flex-wrap">
-                  <div class="col-sm-2">
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-8 d-flex justify-content-center align-items-center">
+                      <select id="dailyCategories" class="form-control">
+                        <option value="" disabled selected>Select Category</option>
+                        <option value="temp">Temp</option>
+                      </select>
+                    </div>
+                    <div class="col-sm-2">
+                    </div>
                   </div>
-                  <div class="col-sm-8 d-flex justify-content-center align-items-center">
-                    <select class="form-control">
-                      <option value="" disabled selected>Select Category</option>
-                      <option value="temp">Temp</option>
-                    </select>
-                  </div>
-                  <div class="col-sm-2">
-                  </div>
-                  </div>
+
+
 
                 </div>
                 <div class="col-sm-4">
@@ -107,7 +147,16 @@ import './topnav.css'
                       <h1>Weekly</h1>
                     </div>
                     <div class="col-sm-3 d-flex justify-content-center align-items-center">
-                      <button class="btn btn-primary">Add Category</button>
+                    <Popup id="popup2" trigger={<button class="btn btn-primary" id="weeklyCat">Add Category</button>} modal>
+                    {close => (
+                      <div>
+                        <input placeholder="New Category" type="text" id="categoryW" name="category"></input>
+                        <br/>
+                        <br/>
+                        <button class="btn btn-primary" onClick={() => addCategoryWeekly(document.getElementById("categoryW").value)}>Submit</button>
+                      </div>
+                    )}
+                    </Popup>
                     </div>
                     <div class="col-sm-3 d-flex justify-content-center align-items-center">
                     </div>
@@ -115,16 +164,16 @@ import './topnav.css'
                   </div>
 
                   <div class="row text-center py-4 align-content-between flex-wrap">
-                  <div class="col-sm-2">
-                  </div>
-                  <div class="col-sm-8 d-flex justify-content-center align-items-center">
-                    <select class="form-control">
-                      <option value="" disabled selected>Select Category</option>
-                      <option value="temp">Temp</option>
-                    </select>
-                  </div>
-                  <div class="col-sm-2">
-                  </div>
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-8 d-flex justify-content-center align-items-center">
+                      <select id="weeklyCategories" class="form-control">
+                        <option value="" disabled selected>Select Category</option>
+                        <option value="temp">Temp</option>
+                      </select>
+                    </div>
+                    <div class="col-sm-2">
+                    </div>
                   </div>
 
                 </div>
@@ -136,7 +185,16 @@ import './topnav.css'
                       <h1>Monthly</h1>
                     </div>
                     <div class="col-sm-3 d-flex justify-content-center align-items-center">
-                      <button class="btn btn-primary">Add Category</button>
+                    <Popup id="popup3" trigger={<button class="btn btn-primary" id="monthlyCat">Add Category</button>} modal>
+                    {close => (
+                      <div>
+                        <input placeholder="New Category" type="text" id="categoryM" name="category"></input>
+                        <br/>
+                        <br/>
+                        <button class="btn btn-primary" onClick={() => addCategoryMonthly(document.getElementById("categoryM").value)}>Submit</button>
+                      </div>
+                    )}
+                    </Popup>
                     </div>
                       <div class="col-sm-3 d-flex justify-content-center align-items-center">
                     </div>
@@ -147,7 +205,7 @@ import './topnav.css'
                     <div class="col-sm-2">
                     </div>
                     <div class="col-sm-8 d-flex justify-content-center align-items-center">
-                      <select class="form-control">
+                      <select id="monthlyCategories" class="form-control">
                         <option value="" disabled selected>Select Category</option>
                         <option value="temp">Temp</option>
                       </select>
