@@ -93,3 +93,42 @@ app.get('/api/getCategories', function(req, res){
     res.json(rows);
   })  
 })
+
+app.get('/api/getCategoryCount', function(req, res){
+  let user = req.query.tagId;
+  connection.query('SELECT COUNT(*) as c FROM Categories WHERE uID=?', user, (err, rows) => {
+    if (err) throw err;
+    var catNum = rows[0].c.toString();
+    res.json(catNum);
+  })
+})
+
+app.get('/api/getCategoryCountByFreq', function(req, res){
+  let user = req.query.tagId;
+  let freq = req.query.tagId2;
+  var insert = 'SELECT COUNT(*) as c FROM Categories WHERE uID =' + user + ' AND type =' + freq;
+  connection.query(insert, (err, rows) => {    if (err) throw err;
+    var catNum = rows[0].c.toString();
+    res.json(catNum);
+  })
+})
+
+app.get('/api/getHabitCount', function(req, res){
+  let user = req.query.tagId;
+  var insert = 'SELECT COUNT(*) as c FROM Habits WHERE uID =' + user;
+  connection.query(insert, (err, rows) => {
+    if (err) throw err;
+    var habNum = rows[0].c.toString();
+    res.json(habNum);
+  })
+})
+
+app.get('/api/getHabitCountByFreq', function(req, res){
+  let user = req.query.tagId;
+  let freq = req.query.tagId2;
+  var insert = 'SELECT COUNT(*) as c FROM Habits JOIN Categories on Habits.cID = Categories.cID WHERE Habits.uID =' + user + ' AND type =' + freq;
+  connection.query(insert, (err, rows) => {    if (err) throw err;
+    var habNum = rows[0].c.toString();
+    res.json(habNum);
+  })
+})
