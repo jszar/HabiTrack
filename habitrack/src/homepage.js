@@ -198,10 +198,28 @@ function addCategoryMonthly(category){
 }
 
 function addHabitDaily(habit, des, prio, cat){
-  //TODO: call other habit funciton or merge?
+  //TODO: call other habit funciton to add to db or merge functions?
   var ul = document.getElementById("dailyHabitList");
   var li = document.createElement("li");
-  li.innerHTML = habit+" <input class='' type='checkbox' value='' checked='' onClick='this.checked=!this.checked;''></input>"
+  li.innerHTML = habit+" <input class='' type='checkbox' value=''></input>"
+  ul.appendChild(li)
+
+
+}
+
+function addHabitWeekly(habit, des, prio, cat){
+  var ul = document.getElementById("weeklyHabitList");
+  var li = document.createElement("li");
+  li.innerHTML = habit+" <input class='' type='checkbox' value=''></input>"
+  ul.appendChild(li)
+
+
+}
+
+function addHabitMonthly(habit, des, prio, cat){
+  var ul = document.getElementById("monthlyHabitList");
+  var li = document.createElement("li");
+  li.innerHTML = habit+" <input class='' type='checkbox' value=''></input>"
   ul.appendChild(li)
 
 
@@ -287,9 +305,7 @@ function addHabitDaily(habit, des, prio, cat){
                       </div>
                         <div class="col-lg-5">
                           <ul style={{fontSize: "25px"}} id="dailyHabitList">
-                            <li>Jogging <input class="" type="checkbox" value="" checked="" onClick="this.checked=!this.checked;"></input></li>
-                            <li>Walk dog <input class="" type="checkbox" value="" checked="" onClick="this.checked=!this.checked;"></input></li>
-                            <li>Dishes <input class="" type="checkbox" value="" checked="" onClick="this.checked=!this.checked;"></input></li>
+
                           </ul>
                         </div>
                         <div class="col-sm-2">
@@ -331,7 +347,37 @@ function addHabitDaily(habit, des, prio, cat){
                       </select>
                     </div>
                     <div class="col-sm-2">
+                      <div class="col-sm-8 d-flex justify-content-center align-items-center">
+                          <Popup id="popup4" trigger={<button class="btn btn-primary btn-sm" id="weeklyHabit">Add Habit</button>} modal>
+                          {close => (
+                          <div>
+                            <input placeholder="Habit Name" type="text" id="habitDname2" name="category"></input>
+                            <br/>
+                            <br/>
+                            <input placeholder="Short Description" type="text" id="habitDdes2" name="category"></input>
+                            <br/>
+                            <br/>
+                            <input placeholder="Priority (Enter 1, 2, or 3)" type="text" id="habitDprio2" name="category"></input>
+                            <br/>
+                            <br/>
+                            <button class="btn btn-primary" onClick={() => addHabitWeekly(document.getElementById("habitDname2").value, document.getElementById("habitDdes2").value, document.getElementById("habitDprio2").value, document.getElementById("weeeklyCategories").value)}>Submit</button>
+                          </div>
+                        )}
+                        </Popup>
+                        </div>
                     </div>
+
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-3">
+                    </div>
+                      <div class="col-lg-5">
+                        <ul style={{fontSize: "25px"}} id="weeklyHabitList">
+
+                        </ul>
+                      </div>
+                      <div class="col-sm-2">
+                      </div>
                   </div>
 
                 </div>
@@ -368,7 +414,36 @@ function addHabitDaily(habit, des, prio, cat){
                       </select>
                     </div>
                     <div class="col-sm-2">
+                      <div class="col-sm-8 d-flex justify-content-center align-items-center">
+                        <Popup id="popup4" trigger={<button class="btn btn-primary btn-sm" id="monthlyHabit">Add Habit</button>} modal>
+                        {close => (
+                        <div>
+                          <input placeholder="Habit Name" type="text" id="habitDname3" name="category"></input>
+                          <br/>
+                          <br/>
+                          <input placeholder="Short Description" type="text" id="habitDdes3" name="category"></input>
+                          <br/>
+                          <br/>
+                          <input placeholder="Priority (Enter 1, 2, or 3)" type="text" id="habitDprio3" name="category"></input>
+                          <br/>
+                          <br/>
+                          <button class="btn btn-primary" onClick={() => addHabitMonthly(document.getElementById("habitDname3").value, document.getElementById("habitDdes3").value, document.getElementById("habitDprio3").value, document.getElementById("monthlyCategories").value)}>Submit</button>
+                        </div>
+                      )}
+                      </Popup>
+                      </div>
                     </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-3">
+                    </div>
+                      <div class="col-lg-5">
+                        <ul style={{fontSize: "25px"}} id="monthlyHabitList">
+
+                        </ul>
+                      </div>
+                      <div class="col-sm-2">
+                      </div>
                   </div>
 
                 </div>
