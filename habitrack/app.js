@@ -93,3 +93,50 @@ app.get('/api/getCategories', function(req, res){
     res.json(rows);
   })  
 })
+
+app.get('/api/addHabit', function(req, res){
+  let uid = req.query.tagId;
+  let habit = req.query.tagId2;
+  let des = req.query.tagId3;
+  let prio = req.query.tagId4;
+  let cat = req.query.tagId5;
+
+  var getcID = 'SELECT cID FROM Categories WHERE uID=' + uid + ' AND name=\'' + cat + '\'';
+  connection.query(getcID, (err, rows) => {
+    if (err) throw err;
+    var insert = 'INSERT INTO Habits (uID, name, description, priority, cID) VALUES (' + uid + ', \'' + habit + '\', \'' + des + '\', ' + prio + ', ' + rows[0].cID + ')';
+    connection.query(insert, (err, rows) => {
+      if (err) throw err;
+      res.send('1');
+    })
+  })  
+})
+
+app.get('/api/addDate', function(req, res){
+  let date = req.query.tagId;
+  
+  var getDate = 'SELECT dID FROM Dates WHERE date=\'' + date + '\'';
+  connection.query(getDate, (err, rows) => {
+    if (err) throw err;
+    let ret = '\'' + rows[0].dID + '\'';
+    res.send(ret);
+  })  
+})
+
+app.get('/api/addHabitInstance', function(req, res){
+  let habit = req.query.tagId;
+  let dID = req.query.tagId2;
+  let checked = req.query.tagId3;
+  let uid = req.query.tagId4;
+
+  var gethID = 'SELECT hID FROM Habits WHERE uID=' + uid + ' AND name=\'' + habit + '\'';
+  
+  connection.query(gethID, (err, rows) => {
+    if (err) throw err;
+    var insert = 'INSERT INTO HabitInstance (hID, dID, checked) VALUES (' + rows[0].hID + ', '  + dID + ', ' + checked + ')';
+    connection.query(insert, (err, rows) => {
+      if (err) throw err;
+      res.send('1');
+    })
+  })  
+})
