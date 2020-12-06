@@ -76,7 +76,7 @@ function getHabitInstances(){
   let url = 'http://localhost:3001/api/getHabitInstances' + '?tagId=' + uid;
 
   fetch(url).then(function(response){
-    return response.text();
+    return response.json();
   }).then(function(data){
     console.log(data);
   }).catch(function(error){
