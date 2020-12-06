@@ -29,13 +29,13 @@ function getCurrentDate(){
 function getCategories(){
   var uid = localStorage.getItem('currentuserID');
   let url = 'http://localhost:3001/api/getCategories' + '?tagId=' + uid;
-  
+
   fetch(url).then(function(response){
     return response.text();
   }).then(function(data){
-    
+
     let cats = data.split('},');
-    
+
     for(let i = 0; i < cats.length; i++){
       let split = cats[i].indexOf('\",\"');
       let name = cats[i].substring(9, split);
@@ -64,7 +64,7 @@ function getCategories(){
         x.add(option);
       }
 
-      
+
     }
   }).catch(function(error){
     console.error();
@@ -92,10 +92,10 @@ function addCategoryDaily(category){
   option.value = category;
   option.text = category
   x.add(option);
-  
+
   var uid = localStorage.getItem('currentuserID');
   let url = 'http://localhost:3001/api/addCategory' + '?tagId=' + uid + '&tagId2=' + category + '&tagId3=' + 'Daily';
-  
+
   fetch(url).then(function(response){
     return response.text();
   }).then(function(data){
@@ -110,13 +110,13 @@ function addCategoryDaily(category){
 function addDate(habit){
   var d = new Date();
   let date = d.getMonth()+1 + '/' + d.getDate() + '/' + d.getFullYear();
-  
+
   let url = 'http://localhost:3001/api/addDate' + '?tagId=' + date;
-  
+
   fetch(url).then(function(response){
     return response.text();
   }).then(function(data){
-    let dID = data; 
+    let dID = data;
     addHabitInstance(habit, dID, false);
   }).catch(function(error){
     console.error();
@@ -126,7 +126,7 @@ function addDate(habit){
 function addHabitInstance(habit, dId, checked){
   let uid = localStorage.getItem('currentuserID');
   let url = 'http://localhost:3001/api/addHabitInstance' + '?tagId=' + habit + '&tagId2=' + dId + '&tagId3=' + checked + '&tagId4=' + uid;
-  
+
   fetch(url).then(function(response){
     return response.text();
   }).then(function(data){
@@ -164,7 +164,7 @@ function addCategoryWeekly(category){
 
   var uid = localStorage.getItem('currentuserID');
   let url = 'http://localhost:3001/api/addCategory' + '?tagId=' + uid + '&tagId2=' + category + '&tagId3=' + 'Weekly';
-  
+
   fetch(url).then(function(response){
     return response.text();
   }).then(function(data){
@@ -185,7 +185,7 @@ function addCategoryMonthly(category){
 
   var uid = localStorage.getItem('currentuserID');
   let url = 'http://localhost:3001/api/addCategory' + '?tagId=' + uid + '&tagId2=' + category + '&tagId3=' + 'Monthly';
-  
+
   fetch(url).then(function(response){
     return response.text();
   }).then(function(data){
@@ -195,6 +195,16 @@ function addCategoryMonthly(category){
   }).catch(function(error){
     console.error();
   })
+}
+
+function addHabitDaily(habit, des, prio, cat){
+  //TODO: call other habit funciton or merge?
+  var ul = document.getElementById("dailyHabitList");
+  var li = document.createElement("li");
+  li.innerHTML = habit+" <input class='' type='checkbox' value='' checked='' onClick='this.checked=!this.checked;''></input>"
+  ul.appendChild(li)
+
+
 }
 
   class App extends Component {
@@ -211,7 +221,7 @@ function addCategoryMonthly(category){
             <div class="container" align="center">
               <div class="row">
                 <div class="col-sm-12">
-                  <h1>HabiTracker Homepage</h1>
+                  <h1>HabiTracker Homepage: Habits for {date}</h1>
                 </div>
               </div>
             </div>
@@ -247,7 +257,7 @@ function addCategoryMonthly(category){
                     </div>
                     <div class="col-sm-8 d-flex justify-content-center align-items-center">
                       <select id="dailyCategories" class="form-control">
-                        <option value="" disabled selected>Select Category</option>                      
+                        <option value="" disabled selected>Select Category</option>
                       </select>
                       <br/>
                     </div>
@@ -265,19 +275,29 @@ function addCategoryMonthly(category){
                         <input placeholder="Priority (Enter 1, 2, or 3)" type="text" id="habitDprio" name="category"></input>
                         <br/>
                         <br/>
-                        <button class="btn btn-primary" onClick={() => addHabit(document.getElementById("habitDname").value, document.getElementById("habitDdes").value, document.getElementById("habitDprio").value, document.getElementById("dailyCategories").value)}>Submit</button>
+                        <button class="btn btn-primary" onClick={() => addHabitDaily(document.getElementById("habitDname").value, document.getElementById("habitDdes").value, document.getElementById("habitDprio").value, document.getElementById("dailyCategories").value)}>Submit</button>
                       </div>
                     )}
                     </Popup>
                     </div>
                     </div>
                   </div>
-                  <div class="col-sm-8 d-flex justify-content-center align-items-center">
-                      <h2>Habits for {date}</h2>
+                    <div class="row">
+                      <div class="col-sm-3">
+                      </div>
+                        <div class="col-lg-5">
+                          <ul style={{fontSize: "25px"}} id="dailyHabitList">
+                            <li>Jogging <input class="" type="checkbox" value="" checked="" onClick="this.checked=!this.checked;"></input></li>
+                            <li>Walk dog <input class="" type="checkbox" value="" checked="" onClick="this.checked=!this.checked;"></input></li>
+                            <li>Dishes <input class="" type="checkbox" value="" checked="" onClick="this.checked=!this.checked;"></input></li>
+                          </ul>
+                        </div>
+                        <div class="col-sm-2">
+                        </div>
                     </div>
 
                 </div>
-  
+
                 <div class="col-sm-4">
                   <div class="row text-center py-4 align-content-between flex-wrap">
                     <div class="col-sm-3 d-flex justify-content-center align-items-center">
