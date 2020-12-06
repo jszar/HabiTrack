@@ -4,6 +4,8 @@ import './modal.css'
 import Popup from "reactjs-popup";
 var user = localStorage.getItem('currentuser');
 let uid = getUserID(user);
+getCurrentDate();
+var date = localStorage.getItem('currentDate');
 
 function getUserID(username){
   let url = 'http://localhost:3001/api/getUID' + '?tagId=' + user;
@@ -18,6 +20,12 @@ function getUserID(username){
   })
 }
 
+function getCurrentDate(){
+  var d = new Date();
+  let date = d.getMonth()+1 + '/' + d.getDate();
+  localStorage.setItem('currentDate', date);
+}
+
 function getCategories(){
   var uid = localStorage.getItem('currentuserID');
   let url = 'http://localhost:3001/api/getCategories' + '?tagId=' + uid;
@@ -29,7 +37,6 @@ function getCategories(){
     let cats = data.split('},');
     
     for(let i = 0; i < cats.length; i++){
-      console.log(cats[i])
       let split = cats[i].indexOf('\",\"');
       let name = cats[i].substring(9, split);
       let type = cats[i].substring(split+10, cats[i].lastIndexOf('\"'));
@@ -64,6 +71,21 @@ function getCategories(){
   })
 }
 
+function getHabitInstances(){
+  var uid = localStorage.getItem('currentuserID');
+  let url = 'http://localhost:3001/api/getHabitInstances' + '?tagId=' + uid;
+
+  fetch(url).then(function(response){
+    return response.text();
+  }).then(function(data){
+    console.log(data);
+  }).catch(function(error){
+    console.error();
+  })
+}
+
+getHabitInstances();
+
 function addCategoryDaily(category){
   var x = document.getElementById("dailyCategories")
   var option = document.createElement("option");
@@ -79,6 +101,54 @@ function addCategoryDaily(category){
   }).then(function(data){
     if(data == 1){
       console.log('OK');
+    }
+  }).catch(function(error){
+    console.error();
+  })
+}
+
+function addDate(habit){
+  var d = new Date();
+  let date = d.getMonth()+1 + '/' + d.getDate() + '/' + d.getFullYear();
+  
+  let url = 'http://localhost:3001/api/addDate' + '?tagId=' + date;
+  
+  fetch(url).then(function(response){
+    return response.text();
+  }).then(function(data){
+    let dID = data; 
+    addHabitInstance(habit, dID, false);
+  }).catch(function(error){
+    console.error();
+  })
+}
+
+function addHabitInstance(habit, dId, checked){
+  let uid = localStorage.getItem('currentuserID');
+  let url = 'http://localhost:3001/api/addHabitInstance' + '?tagId=' + habit + '&tagId2=' + dId + '&tagId3=' + checked + '&tagId4=' + uid;
+  
+  fetch(url).then(function(response){
+    return response.text();
+  }).then(function(data){
+    if(data == 1){
+      console.log('OK');
+    }
+  }).catch(function(error){
+    console.error();
+  })
+}
+
+function addHabit(habit, des, prio, cat){
+  let uid = localStorage.getItem('currentuserID');
+  let url = 'http://localhost:3001/api/addHabit' + '?tagId=' + uid + '&tagId2=' + habit + '&tagId3=' + des + '&tagId4=' + prio + '&tagId5=' + cat;
+
+  fetch(url).then(function(response){
+    return response.text();
+  }).then(function(data){
+    if(data == 1){
+      console.log('OK');
+      //Check if entry needs to be added to date table
+      addDate(habit);
     }
   }).catch(function(error){
     console.error();
@@ -179,14 +249,35 @@ function addCategoryMonthly(category){
                       <select id="dailyCategories" class="form-control">
                         <option value="" disabled selected>Select Category</option>                      
                       </select>
+                      <br/>
                     </div>
                     <div class="col-sm-2">
+                    <div class="col-sm-8 d-flex justify-content-center align-items-center">
+                      <Popup id="popup4" trigger={<button class="btn btn-primary btn-sm" id="dailyHabit">Add Habit</button>} modal>
+                      {close => (
+                      <div>
+                        <input placeholder="Habit Name" type="text" id="habitDname" name="category"></input>
+                        <br/>
+                        <br/>
+                        <input placeholder="Short Description" type="text" id="habitDdes" name="category"></input>
+                        <br/>
+                        <br/>
+                        <input placeholder="Priority (Enter 1, 2, or 3)" type="text" id="habitDprio" name="category"></input>
+                        <br/>
+                        <br/>
+                        <button class="btn btn-primary" onClick={() => addHabit(document.getElementById("habitDname").value, document.getElementById("habitDdes").value, document.getElementById("habitDprio").value, document.getElementById("dailyCategories").value)}>Submit</button>
+                      </div>
+                    )}
+                    </Popup>
+                    </div>
                     </div>
                   </div>
-
-
+                  <div class="col-sm-8 d-flex justify-content-center align-items-center">
+                      <h2>Habits for {date}</h2>
+                    </div>
 
                 </div>
+  
                 <div class="col-sm-4">
                   <div class="row text-center py-4 align-content-between flex-wrap">
                     <div class="col-sm-3 d-flex justify-content-center align-items-center">
