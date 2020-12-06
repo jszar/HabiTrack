@@ -72,9 +72,19 @@ function getCategories(){
 }
 
 function getHabitInstances(){
-  
+  var uid = localStorage.getItem('currentuserID');
+  let url = 'http://localhost:3001/api/getHabitInstances' + '?tagId=' + uid;
 
+  fetch(url).then(function(response){
+    return response.text();
+  }).then(function(data){
+    console.log(data);
+  }).catch(function(error){
+    console.error();
+  })
 }
+
+getHabitInstances();
 
 function addCategoryDaily(category){
   var x = document.getElementById("dailyCategories")

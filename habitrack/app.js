@@ -94,6 +94,16 @@ app.get('/api/getCategories', function(req, res){
   })  
 })
 
+app.get('/api/getHabitInstances', function(req, res){
+  let uid = req.query.tagId;
+  
+  var insert = 'SELECT * FROM HabitInstance NATURAL JOIN Habits WHERE uID=' + uid;
+  connection.query(insert, (err, rows) => {
+    if (err) throw err;
+    res.json(rows);
+  })  
+})
+
 app.get('/api/addHabit', function(req, res){
   let uid = req.query.tagId;
   let habit = req.query.tagId2;
