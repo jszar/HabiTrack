@@ -80,10 +80,8 @@ function clearHabits(type){
   }else{
     var list = document.getElementById("monthlyHabitList");
   }
-  if(list.childNodes.length != 0){
-    for(let i = 0; i < list.childNodes.length; i++){
-      list.removeChild(list.childNodes[i]);
-    }
+  while(list.hasChildNodes()){
+    list.removeChild(list.firstChild);
   }
 }
 
