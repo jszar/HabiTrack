@@ -98,8 +98,32 @@ function getHabitInstances(cat, type){
         if(data[i]['type'] == 'Daily' && data[i]['c_name'] == cat){
           var ul = document.getElementById("dailyHabitList");
           var li = document.createElement("li");
-          li.innerHTML = data[i]['name'] + "<br/><input class='' type='checkbox' value=''></input>" + "<br/><small><b>Description:<b/> " + data[i]['description'] + "<br/>Priority: " + data[i]['priority'] + "</small>";
+          var uid = localStorage.getItem('currentuserID');
+          let id = uid + '_' + data[i]['hID'] + '_' + data[i]['name'];
+          console.log(data[i]);
+          console.log(data[i]['checked']);
+          if(data[i]['checked'] == 1){
+            li.innerHTML = data[i]['name'] + "<br/><input class='' type='checkbox' id='" + id + "' value='' checked>" + "<br/><small><b>Description:<b/> " + data[i]['description'] + "<br/>Priority: " + data[i]['priority'] + "</small>";
+          }else{
+            li.innerHTML = data[i]['name'] + "<br/><input class='' type='checkbox' id='" + id + "' value=''>" + "<br/><small><b>Description:<b/> " + data[i]['description'] + "<br/>Priority: " + data[i]['priority'] + "</small>";
+          }
           ul.appendChild(li)
+          
+          var cb = document.getElementById(id);
+          cb.addEventListener('click', () => {
+            console.log(cb.checked);
+            let url = 'http://localhost:3001/api/updateCheck' + '?tagId=' + data[i]['hID'] + '&tagId2=' + data[i]['dID'] + '&tagId3=' + cb.checked;
+            console.log(url);
+            fetch(url).then(function(response){
+              return response.text();
+            }).then(function(data){
+              if(data == '1'){
+                console.log('UPDATED');
+              }
+            }).catch(function(error){
+              console.error();
+            })
+          })
         }
       }
     }else if(type=='Weekly'){
@@ -108,7 +132,29 @@ function getHabitInstances(cat, type){
         if(data[i]['type'] == 'Weekly' && data[i]['c_name'] == cat){
           var ul = document.getElementById("weeklyHabitList");
           var li = document.createElement("li");
-          li.innerHTML = data[i]['name'] + "<br/><input class='' type='checkbox' value=''></input>" + "<br/><small><b>Description:<b/> " + data[i]['description'] + "<br/>Priority: " + data[i]['priority'] + "</small>";          ul.appendChild(li)
+          var uid = localStorage.getItem('currentuserID');
+          let id = uid + '_' + data[i]['hID'] + '_' + data[i]['name'];
+          if(data[i]['checked'] == 1){
+            li.innerHTML = data[i]['name'] + "<br/><input class='' type='checkbox' id='" + id + "' value='' checked>" + "<br/><small><b>Description:<b/> " + data[i]['description'] + "<br/>Priority: " + data[i]['priority'] + "</small>";
+          }else{
+            li.innerHTML = data[i]['name'] + "<br/><input class='' type='checkbox' id='" + id + "' value=''>" + "<br/><small><b>Description:<b/> " + data[i]['description'] + "<br/>Priority: " + data[i]['priority'] + "</small>";
+          }          
+          ul.appendChild(li)
+
+          var cb = document.getElementById(id);
+          cb.addEventListener('click', () => {
+            console.log(cb.checked);
+            let url = 'http://localhost:3001/api/updateCheck' + '?tagId=' + data[i]['hID'] + '&tagId2=' + data[i]['dID'] + '&tagId3=' + cb.checked;
+            fetch(url).then(function(response){
+              return response.text();
+            }).then(function(data){
+              if(data == '1'){
+                console.log('UPDATED');
+              }
+            }).catch(function(error){
+              console.error();
+            })
+          })
         }
       }
     }else if(type=='Monthly'){
@@ -117,7 +163,29 @@ function getHabitInstances(cat, type){
         if(data[i]['type'] == 'Monthly' && data[i]['c_name'] == cat){
           var ul = document.getElementById("monthlyHabitList");
           var li = document.createElement("li");
-          li.innerHTML = data[i]['name'] + "<br/><input class='' type='checkbox' value=''></input>" + "<br/><small><b>Description:<b/> " + data[i]['description'] + "<br/>Priority: " + data[i]['priority'] + "</small>";          ul.appendChild(li)
+          var uid = localStorage.getItem('currentuserID');
+          let id = uid + '_' + data[i]['hID'] + '_' + data[i]['name'];
+          if(data[i]['checked'] == 1){
+            li.innerHTML = data[i]['name'] + "<br/><input class='' type='checkbox' id='" + id + "' value='' checked>" + "<br/><small><b>Description:<b/> " + data[i]['description'] + "<br/>Priority: " + data[i]['priority'] + "</small>";
+          }else{
+            li.innerHTML = data[i]['name'] + "<br/><input class='' type='checkbox' id='" + id + "' value=''>" + "<br/><small><b>Description:<b/> " + data[i]['description'] + "<br/>Priority: " + data[i]['priority'] + "</small>";
+          }          
+          ul.appendChild(li)
+
+          var cb = document.getElementById(id);
+          cb.addEventListener('click', () => {
+            console.log(cb.checked);
+            let url = 'http://localhost:3001/api/updateCheck' + '?tagId=' + data[i]['hID'] + '&tagId2=' + data[i]['dID'] + '&tagId3=' + cb.checked;
+            fetch(url).then(function(response){
+              return response.text();
+            }).then(function(data){
+              if(data == '1'){
+                console.log('UPDATED');
+              }
+            }).catch(function(error){
+              console.error();
+            })
+          })
         }
       }
     }
@@ -285,7 +353,6 @@ function addHabitMonthly(habit, des, prio, cat){
             <div class="topnav">
               <a class="active" href="homepage">Home</a>
               <a href="stats">Stats</a>
-              <a href="friends">Friends</a>
               <a href="/">Sign Out</a>
             </div>
             <div class="container" align="center">

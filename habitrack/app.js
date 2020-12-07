@@ -218,3 +218,15 @@ app.get('/api/getHabitConsistencyByFreq', function(req, res){
     }
   })
 })
+
+app.get('/api/updateCheck', function(req, res){
+  let hid = req.query.tagId;
+  let did = req.query.tagId2;
+  let check = req.query.tagId3;
+  
+  var update = 'UPDATE HabitInstance SET checked=' + check + ' WHERE hID=' + hid + ' AND dID=' + did;
+  connection.query(update, (err, rows) => {
+    if (err) throw err;
+    res.send('1');
+  })  
+})

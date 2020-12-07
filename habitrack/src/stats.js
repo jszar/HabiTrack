@@ -182,16 +182,13 @@ function getHabConMonthly(uid){
             <div class="topnav">
               <a href="homepage">Home</a>
               <a class="active" href="stats">Stats</a>
-              <a href="friends">Friends</a>
               <a href="/">Sign Out</a>
             </div>
                 <h1>Stats Page</h1>
-                  <p>Just...be...patient...</p>
                   <hr></hr>
                   <h3>USER STATS</h3>
                   <h4>Username: {user}</h4>
                   <h4>User ID: {uid}</h4>
-                  <h4>Actual Name: </h4>
                   <hr></hr>
                   <h3>CATEGORY STATS</h3>
                   <h4>Total Categories Created: {catNumTotal}</h4>
