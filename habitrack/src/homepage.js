@@ -98,7 +98,7 @@ function getHabitInstances(cat, type){
         if(data[i]['type'] == 'Daily' && data[i]['c_name'] == cat){
           var ul = document.getElementById("dailyHabitList");
           var li = document.createElement("li");
-          li.innerHTML = data[i]['name'] + " <input class='' type='checkbox' value=''></input>" + "<br/><small><b>Description:<b/> " + data[i]['description'] + "</small>";
+          li.innerHTML = data[i]['name'] + "<br/><input class='' type='checkbox' value=''></input>" + "<br/><small><b>Description:<b/> " + data[i]['description'] + "<br/>Priority: " + data[i]['priority'] + "</small>";
           ul.appendChild(li)
         }
       }
@@ -108,8 +108,7 @@ function getHabitInstances(cat, type){
         if(data[i]['type'] == 'Weekly' && data[i]['c_name'] == cat){
           var ul = document.getElementById("weeklyHabitList");
           var li = document.createElement("li");
-          li.innerHTML = data[i]['name'] + " <input class='' type='checkbox' value=''></input>" + "<br/><small><b>Description:<b/> " + data[i]['description'] + "</small>";
-          ul.appendChild(li)
+          li.innerHTML = data[i]['name'] + "<br/><input class='' type='checkbox' value=''></input>" + "<br/><small><b>Description:<b/> " + data[i]['description'] + "<br/>Priority: " + data[i]['priority'] + "</small>";          ul.appendChild(li)
         }
       }
     }else if(type=='Monthly'){
@@ -118,8 +117,7 @@ function getHabitInstances(cat, type){
         if(data[i]['type'] == 'Monthly' && data[i]['c_name'] == cat){
           var ul = document.getElementById("monthlyHabitList");
           var li = document.createElement("li");
-          li.innerHTML = data[i]['name'] + " <input class='' type='checkbox' value=''></input>" + "<br/><small><b>Description:<b/> " + data[i]['description'] + "</small>";
-          ul.appendChild(li)
+          li.innerHTML = data[i]['name'] + "<br/><input class='' type='checkbox' value=''></input>" + "<br/><small><b>Description:<b/> " + data[i]['description'] + "<br/>Priority: " + data[i]['priority'] + "</small>";          ul.appendChild(li)
         }
       }
     }
@@ -259,7 +257,7 @@ function addHabitDaily(habit, des, prio, cat){
   addHabit(habit, des, prio, cat);
   var ul = document.getElementById("dailyHabitList");
   var li = document.createElement("li");
-  li.innerHTML = habit + " <input class='' type='checkbox' value=''></input>" + "<br/><small><b>Description:<b/> " + des + "</small>"
+  li.innerHTML = li.innerHTML = habit + "<br/><input class='' type='checkbox' value=''></input>" + "<br/><small><b>Description:<b/> " + des + "<br/>Priority: " + prio + "</small>";
   ul.appendChild(li)
 }
 
@@ -267,7 +265,7 @@ function addHabitWeekly(habit, des, prio, cat){
   addHabit(habit, des, prio, cat);
   var ul = document.getElementById("weeklyHabitList");
   var li = document.createElement("li");
-  li.innerHTML = habit + " <input class='' type='checkbox' value=''></input>" + "<br/><small><b>Description:<b/> " + des + "</small>"
+  li.innerHTML = habit + "<br/><input class='' type='checkbox' value=''></input>" + "<br/><small><b>Description:<b/> " + des + "<br/>Priority: " + prio + "</small>";
   ul.appendChild(li)
 }
 
@@ -275,7 +273,7 @@ function addHabitMonthly(habit, des, prio, cat){
   addHabit(habit, des, prio, cat);
   var ul = document.getElementById("monthlyHabitList");
   var li = document.createElement("li");
-  li.innerHTML = habit + " <input class='' type='checkbox' value=''></input>" + "<br/><small><b>Description:<b/> " + des + "</small>"
+  li.innerHTML = habit + "<br/><input class='' type='checkbox' value=''></input>" + "<br/><small><b>Description:<b/> " + des + "<br/>Priority: " + prio + "</small>";
   ul.appendChild(li)
 }
 
