@@ -38,7 +38,7 @@ function getCategories(){
 
     for(let i = 0; i < cats.length; i++){
       let split = cats[i].indexOf('\",\"');
-      let name = cats[i].substring(9, split);
+      let name = cats[i].substring(11, split);
       let type = cats[i].substring(split+10, cats[i].lastIndexOf('\"'));
       if(i == 0){
         name = name.substring(1);
@@ -71,20 +71,36 @@ function getCategories(){
   })
 }
 
-function getHabitInstances(){
+function clearHabits(){
+  var list = document.getElementById("dailyHabitList");
+  if(list.childNodes.length != 0){
+    for(let i = 0; i < list.childNodes.length; i++){
+      list.removeChild(list.childNodes[i]);
+    }
+  }
+}
+
+function getHabitInstances(cat){
   var uid = localStorage.getItem('currentuserID');
   let url = 'http://localhost:3001/api/getHabitInstances' + '?tagId=' + uid;
 
   fetch(url).then(function(response){
     return response.json();
   }).then(function(data){
-    console.log(data);
+    clearHabits();
+    for(let i = 0; i < data.length; i++){
+      console.log(data[i]);
+      if(data[i]['type'] == 'Daily' && data[i]['c_name'] == cat){
+        var ul = document.getElementById("dailyHabitList");
+        var li = document.createElement("li");
+        li.innerHTML = data[i]['name'] + " <input class='' type='checkbox' value=''></input>" + "<br/><small><b>Description:<b/> " + data[i]['description'] + "</small>";
+        ul.appendChild(li)
+      }
+    }
   }).catch(function(error){
     console.error();
   })
 }
-
-getHabitInstances();
 
 function addCategoryDaily(category){
   var x = document.getElementById("dailyCategories")
@@ -105,6 +121,11 @@ function addCategoryDaily(category){
   }).catch(function(error){
     console.error();
   })
+}
+
+function DailyCatChanged(){
+  var cat = document.getElementById("dailyCategories");
+  getHabitInstances(cat.value);
 }
 
 function addDate(habit){
@@ -199,30 +220,27 @@ function addCategoryMonthly(category){
 
 function addHabitDaily(habit, des, prio, cat){
   //TODO: call other habit funciton to add to db or merge functions?
+  addHabit(habit, des, prio, cat);
   var ul = document.getElementById("dailyHabitList");
   var li = document.createElement("li");
   li.innerHTML = habit+" <input class='' type='checkbox' value=''></input>"
   ul.appendChild(li)
-
-
 }
 
 function addHabitWeekly(habit, des, prio, cat){
+  addHabit(habit, des, prio, cat);
   var ul = document.getElementById("weeklyHabitList");
   var li = document.createElement("li");
   li.innerHTML = habit+" <input class='' type='checkbox' value=''></input>"
   ul.appendChild(li)
-
-
 }
 
 function addHabitMonthly(habit, des, prio, cat){
+  addHabit(habit, des, prio, cat);
   var ul = document.getElementById("monthlyHabitList");
   var li = document.createElement("li");
   li.innerHTML = habit+" <input class='' type='checkbox' value=''></input>"
   ul.appendChild(li)
-
-
 }
 
   class App extends Component {
@@ -274,7 +292,7 @@ function addHabitMonthly(habit, des, prio, cat){
                     <div class="col-sm-2">
                     </div>
                     <div class="col-sm-8 d-flex justify-content-center align-items-center">
-                      <select id="dailyCategories" class="form-control">
+                      <select id="dailyCategories" class="form-control" onChange={() => DailyCatChanged()}>
                         <option value="" disabled selected>Select Category</option>
                       </select>
                       <br/>

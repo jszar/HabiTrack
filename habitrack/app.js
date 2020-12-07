@@ -77,7 +77,7 @@ app.get('/api/addCategory', function(req, res){
   let cat = req.query.tagId2;
   let type = req.query.tagId3;
 
-  var insert = 'INSERT INTO Categories (uID, name, type) VALUES (\'' + user + '\', \'' + cat + '\', \'' + type + '\')'
+  var insert = 'INSERT INTO Categories (uID, c_name, type) VALUES (\'' + user + '\', \'' + cat + '\', \'' + type + '\')'
   connection.query(insert, (err, rows) => {
     if (err) throw err;
     res.send('1');
@@ -87,7 +87,7 @@ app.get('/api/addCategory', function(req, res){
 app.get('/api/getCategories', function(req, res){
   let user = req.query.tagId;
   
-  var insert = 'SELECT name, type FROM Categories WHERE uID=' + user;
+  var insert = 'SELECT c_name, type FROM Categories WHERE uID=' + user;
   connection.query(insert, (err, rows) => {
     if (err) throw err;
     res.json(rows);
@@ -97,7 +97,7 @@ app.get('/api/getCategories', function(req, res){
 app.get('/api/getHabitInstances', function(req, res){
   let uid = req.query.tagId;
   
-  var insert = 'SELECT * FROM HabitInstance NATURAL JOIN Habits WHERE uID=' + uid;
+  var insert = 'SELECT * FROM HabitInstance hi JOIN Habits h ON hi.hID = h.hID JOIN Categories c ON h.cID = c.cID WHERE c.uID=' + uid + ' ORDER BY priority ASC';
   connection.query(insert, (err, rows) => {
     if (err) throw err;
     res.json(rows);
@@ -111,7 +111,7 @@ app.get('/api/addHabit', function(req, res){
   let prio = req.query.tagId4;
   let cat = req.query.tagId5;
 
-  var getcID = 'SELECT cID FROM Categories WHERE uID=' + uid + ' AND name=\'' + cat + '\'';
+  var getcID = 'SELECT cID FROM Categories WHERE uID=' + uid + ' AND c_name=\'' + cat + '\'';
   connection.query(getcID, (err, rows) => {
     if (err) throw err;
     var insert = 'INSERT INTO Habits (uID, name, description, priority, cID) VALUES (' + uid + ', \'' + habit + '\', \'' + des + '\', ' + prio + ', ' + rows[0].cID + ')';
