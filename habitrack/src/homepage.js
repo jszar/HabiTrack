@@ -100,8 +100,6 @@ function getHabitInstances(cat, type){
           var li = document.createElement("li");
           var uid = localStorage.getItem('currentuserID');
           let id = uid + '_' + data[i]['hID'] + '_' + data[i]['name'];
-          console.log(data[i]);
-          console.log(data[i]['checked']);
           if(data[i]['checked'] == 1){
             li.innerHTML = data[i]['name'] + "<br/><input class='' type='checkbox' id='" + id + "' value='' checked>" + "<br/><small><b>Description:<b/> " + data[i]['description'] + "<br/>Priority: " + data[i]['priority'] + "</small>";
           }else{
@@ -111,9 +109,7 @@ function getHabitInstances(cat, type){
           
           var cb = document.getElementById(id);
           cb.addEventListener('click', () => {
-            console.log(cb.checked);
             let url = 'http://localhost:3001/api/updateCheck' + '?tagId=' + data[i]['hID'] + '&tagId2=' + data[i]['dID'] + '&tagId3=' + cb.checked;
-            console.log(url);
             fetch(url).then(function(response){
               return response.text();
             }).then(function(data){
@@ -143,7 +139,6 @@ function getHabitInstances(cat, type){
 
           var cb = document.getElementById(id);
           cb.addEventListener('click', () => {
-            console.log(cb.checked);
             let url = 'http://localhost:3001/api/updateCheck' + '?tagId=' + data[i]['hID'] + '&tagId2=' + data[i]['dID'] + '&tagId3=' + cb.checked;
             fetch(url).then(function(response){
               return response.text();
@@ -174,7 +169,6 @@ function getHabitInstances(cat, type){
 
           var cb = document.getElementById(id);
           cb.addEventListener('click', () => {
-            console.log(cb.checked);
             let url = 'http://localhost:3001/api/updateCheck' + '?tagId=' + data[i]['hID'] + '&tagId2=' + data[i]['dID'] + '&tagId3=' + cb.checked;
             fetch(url).then(function(response){
               return response.text();
