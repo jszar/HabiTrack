@@ -72,8 +72,14 @@ function getCategories(){
   })
 }
 
-function clearHabits(){
-  var list = document.getElementById("dailyHabitList");
+function clearHabits(type){
+  if(type == 'Daily'){
+    var list = document.getElementById("dailyHabitList");
+  }else if(type == 'Weekly'){
+    var list = document.getElementById("weeklyHabitList");
+  }else{
+    var list = document.getElementById("monthlyHabitList");
+  }
   if(list.childNodes.length != 0){
     for(let i = 0; i < list.childNodes.length; i++){
       list.removeChild(list.childNodes[i]);
@@ -81,23 +87,45 @@ function clearHabits(){
   }
 }
 
-function getHabitInstances(cat){
+function getHabitInstances(cat, type){
   var uid = localStorage.getItem('currentuserID');
   let url = 'http://localhost:3001/api/getHabitInstances' + '?tagId=' + uid;
 
   fetch(url).then(function(response){
     return response.json();
   }).then(function(data){
-    clearHabits();
-    for(let i = 0; i < data.length; i++){
-      console.log(data[i]);
-      if(data[i]['type'] == 'Daily' && data[i]['c_name'] == cat){
-        var ul = document.getElementById("dailyHabitList");
-        var li = document.createElement("li");
-        li.innerHTML = data[i]['name'] + " <input class='' type='checkbox' value=''></input>" + "<br/><small><b>Description:<b/> " + data[i]['description'] + "</small>";
-        ul.appendChild(li)
+    if(type=='Daily'){
+      clearHabits('Daily');
+      for(let i = 0; i < data.length; i++){
+        if(data[i]['type'] == 'Daily' && data[i]['c_name'] == cat){
+          var ul = document.getElementById("dailyHabitList");
+          var li = document.createElement("li");
+          li.innerHTML = data[i]['name'] + " <input class='' type='checkbox' value=''></input>" + "<br/><small><b>Description:<b/> " + data[i]['description'] + "</small>";
+          ul.appendChild(li)
+        }
+      }
+    }else if(type=='Weekly'){
+      clearHabits('Weekly');
+      for(let i = 0; i < data.length; i++){
+        if(data[i]['type'] == 'Weekly' && data[i]['c_name'] == cat){
+          var ul = document.getElementById("weeklyHabitList");
+          var li = document.createElement("li");
+          li.innerHTML = data[i]['name'] + " <input class='' type='checkbox' value=''></input>" + "<br/><small><b>Description:<b/> " + data[i]['description'] + "</small>";
+          ul.appendChild(li)
+        }
+      }
+    }else if(type=='Monthly'){
+      clearHabits('Monthly');
+      for(let i = 0; i < data.length; i++){
+        if(data[i]['type'] == 'Monthly' && data[i]['c_name'] == cat){
+          var ul = document.getElementById("monthlyHabitList");
+          var li = document.createElement("li");
+          li.innerHTML = data[i]['name'] + " <input class='' type='checkbox' value=''></input>" + "<br/><small><b>Description:<b/> " + data[i]['description'] + "</small>";
+          ul.appendChild(li)
+        }
       }
     }
+    
   }).catch(function(error){
     console.error();
   })
@@ -126,7 +154,17 @@ function addCategoryDaily(category){
 
 function DailyCatChanged(){
   var cat = document.getElementById("dailyCategories");
-  getHabitInstances(cat.value);
+  getHabitInstances(cat.value, 'Daily');
+}
+
+function WeeklyCatChanged(){
+  var cat = document.getElementById("weeklyCategories");
+  getHabitInstances(cat.value, 'Weekly');
+}
+
+function MonthlyCatChanged(){
+  var cat = document.getElementById("monthlyCategories");
+  getHabitInstances(cat.value, 'Monthly');
 }
 
 function addDate(habit){
@@ -220,11 +258,10 @@ function addCategoryMonthly(category){
 }
 
 function addHabitDaily(habit, des, prio, cat){
-  //TODO: call other habit funciton to add to db or merge functions?
   addHabit(habit, des, prio, cat);
   var ul = document.getElementById("dailyHabitList");
   var li = document.createElement("li");
-  li.innerHTML = habit+" <input class='' type='checkbox' value=''></input>"
+  li.innerHTML = habit + " <input class='' type='checkbox' value=''></input>" + "<br/><small><b>Description:<b/> " + des + "</small>"
   ul.appendChild(li)
 }
 
@@ -232,7 +269,7 @@ function addHabitWeekly(habit, des, prio, cat){
   addHabit(habit, des, prio, cat);
   var ul = document.getElementById("weeklyHabitList");
   var li = document.createElement("li");
-  li.innerHTML = habit+" <input class='' type='checkbox' value=''></input>"
+  li.innerHTML = habit + " <input class='' type='checkbox' value=''></input>" + "<br/><small><b>Description:<b/> " + des + "</small>"
   ul.appendChild(li)
 }
 
@@ -240,7 +277,7 @@ function addHabitMonthly(habit, des, prio, cat){
   addHabit(habit, des, prio, cat);
   var ul = document.getElementById("monthlyHabitList");
   var li = document.createElement("li");
-  li.innerHTML = habit+" <input class='' type='checkbox' value=''></input>"
+  li.innerHTML = habit + " <input class='' type='checkbox' value=''></input>" + "<br/><small><b>Description:<b/> " + des + "</small>"
   ul.appendChild(li)
 }
 
@@ -361,7 +398,7 @@ function addHabitMonthly(habit, des, prio, cat){
                     <div class="col-sm-2">
                     </div>
                     <div class="col-sm-8 d-flex justify-content-center align-items-center">
-                      <select id="weeklyCategories" class="form-control">
+                      <select id="weeklyCategories" class="form-control" onChange={() => WeeklyCatChanged()}>
                         <option value="" disabled selected>Select Category</option>
                       </select>
                     </div>
@@ -379,7 +416,7 @@ function addHabitMonthly(habit, des, prio, cat){
                             <input placeholder="Priority (Enter 1, 2, or 3)" type="text" id="habitDprio2" name="category"></input>
                             <br/>
                             <br/>
-                            <button class="btn btn-primary" onClick={() => addHabitWeekly(document.getElementById("habitDname2").value, document.getElementById("habitDdes2").value, document.getElementById("habitDprio2").value, document.getElementById("weeeklyCategories").value)}>Submit</button>
+                            <button class="btn btn-primary" onClick={() => addHabitWeekly(document.getElementById("habitDname2").value, document.getElementById("habitDdes2").value, document.getElementById("habitDprio2").value, document.getElementById("weeklyCategories").value)}>Submit</button>
                           </div>
                         )}
                         </Popup>
@@ -428,7 +465,7 @@ function addHabitMonthly(habit, des, prio, cat){
                     <div class="col-sm-2">
                     </div>
                     <div class="col-sm-8 d-flex justify-content-center align-items-center">
-                      <select id="monthlyCategories" class="form-control">
+                      <select id="monthlyCategories" class="form-control" onChange={() => MonthlyCatChanged()}>
                         <option value="" disabled selected>Select Category</option>
                       </select>
                     </div>
