@@ -189,3 +189,32 @@ app.get('/api/getHabitCountByFreq', function(req, res){
     res.json(habNum);
   })
 })
+
+app.get('/api/getHabitConsistency', function(req, res){
+  let user = req.query.tagId;
+  var insert = 'select count(*) as c from Habits natural join HabitInstance where checked = 1 and uID = ' + user
+  + ' UNION select count(*) as c from Habits natural join HabitInstance where uID = ' + user;
+  connection.query(insert, (err, rows) => {
+    if (err) throw err;
+    if (rows[1].c == 0) res.json(0);
+    else {
+      var con = (rows[0].c) / rows[1].c;
+      res.json(con);
+    }
+  })
+})
+
+app.get('/api/getHabitConsistencyByFreq', function(req, res){
+  let user = req.query.tagId;
+  let freq = req.query.tagId2;
+  var insert = 'select count(*) as c from Habits natural join HabitInstance natural join Categories where checked = 1 and type = ' + freq + ' and uID = ' + user
+  + ' UNION select count(*) as c from Habits natural join HabitInstance natural join Categories where type = ' + freq + ' and uID = ' + user;
+  connection.query(insert, (err, rows) => {
+    if (err) throw err;
+    if (rows[1].c == 0) res.json(0);
+    else {
+      var con = (rows[0].c) / rows[1].c;
+      res.json(con);
+    }
+  })
+})

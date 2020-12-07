@@ -10,6 +10,10 @@ getHabNumTotal(uid);
 getHabNumDaily(uid);
 getHabNumWeekly(uid);
 getHabNumMonthly(uid);
+getHabConTotal(uid);
+getHabConDaily(uid);
+getHabConWeekly(uid);
+getHabConMonthly(uid);
 const catNumTotal = localStorage.getItem('catNumTotal');
 const catNumDaily = localStorage.getItem('catNumDaily');
 const catNumWeekly = localStorage.getItem('catNumWeekly');
@@ -18,6 +22,10 @@ const habNumTotal = localStorage.getItem('habNumTotal');
 const habNumDaily = localStorage.getItem('habNumDaily');
 const habNumWeekly = localStorage.getItem('habNumWeekly');
 const habNumMonthly = localStorage.getItem('habNumMonthly');
+const habConTotal = localStorage.getItem('habConTotal');
+const habConDaily = localStorage.getItem('habConDaily');
+const habConWeekly = localStorage.getItem('habConWeekly');
+const habConMonthly = localStorage.getItem('habConMonthly');
 //import './App.css';
 
 function getCatNumTotal(uid){
@@ -115,6 +123,53 @@ function getHabNumMonthly(uid){
     console.error();
   })
 }
+function getHabConTotal(uid){
+  let url = 'http://localhost:3001/api/getHabitConsistency?tagId=' + uid;
+  fetch(url).then(function(response){
+    return response.text();
+  }).then(function(data){
+    let con = Math.round(data * 10000) / 100;
+    localStorage.setItem('habConTotal', con);
+  }).catch(function(error){
+    console.error();
+  })
+}
+function getHabConDaily(uid){
+  let type = '\'Daily\''
+  let url = 'http://localhost:3001/api/getHabitConsistencyByFreq?tagId=' + uid + '&tagId2=' + type;
+  fetch(url).then(function(response){
+    return response.text();
+  }).then(function(data){
+    let con = Math.round(data * 10000) / 100;
+    localStorage.setItem('habConDaily', con);
+  }).catch(function(error){
+    console.error();
+  })
+}
+function getHabConWeekly(uid){
+  let type = '\'Weekly\''
+  let url = 'http://localhost:3001/api/getHabitConsistencyByFreq?tagId=' + uid + '&tagId2=' + type;
+  fetch(url).then(function(response){
+    return response.text();
+  }).then(function(data){
+    let con = Math.round(data * 10000) / 100;
+    localStorage.setItem('habConWeekly', con);
+  }).catch(function(error){
+    console.error();
+  })
+}
+function getHabConMonthly(uid){
+  let type = '\'Monthly\''
+  let url = 'http://localhost:3001/api/getHabitConsistencyByFreq?tagId=' + uid + '&tagId2=' + type;
+  fetch(url).then(function(response){
+    return response.text();
+  }).then(function(data){
+    let con = Math.round(data * 10000) / 100;
+    localStorage.setItem('habConMonthly', con);
+  }).catch(function(error){
+    console.error();
+  })
+}
 
   class App extends Component {
     constructor() {
@@ -149,6 +204,11 @@ function getHabNumMonthly(uid){
                   <h4>Total Daily Habits: {habNumDaily}</h4>
                   <h4>Total Weekly Habits: {habNumWeekly}</h4>
                   <h4>Total Monthly Habits: {habNumMonthly}</h4>
+                  <br></br>
+                  <h4>Consistency of All Habits: {habConTotal}%</h4>
+                  <h4>Consistency of Daily Habits: {habConDaily}%</h4>
+                  <h4>Consistency of Weekly Habits: {habConWeekly}%</h4>
+                  <h4>Consistency of Monthly Habits: {habConMonthly}%</h4>
             </div>
         );
     }
