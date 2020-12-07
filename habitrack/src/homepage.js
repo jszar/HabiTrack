@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './homepage.css'
 import './topnav.css'
 import './modal.css'
 import Popup from "reactjs-popup";
