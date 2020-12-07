@@ -172,10 +172,10 @@ app.get('/api/getCategoryCountByFreq', function(req, res){
 
 app.get('/api/getHabitCount', function(req, res){
   let user = req.query.tagId;
-  var insert = 'SELECT COUNT(*) as c FROM Habits WHERE uID =' + user;
+  var insert = 'SELECT COUNT(*) as a FROM Habits WHERE uID =' + user;
   connection.query(insert, (err, rows) => {
     if (err) throw err;
-    var habNum = rows[0].c.toString();
+    var habNum = rows[0].a.toString();
     res.json(habNum);
   })
 })
@@ -183,9 +183,9 @@ app.get('/api/getHabitCount', function(req, res){
 app.get('/api/getHabitCountByFreq', function(req, res){
   let user = req.query.tagId;
   let freq = req.query.tagId2;
-  var insert = 'SELECT COUNT(*) as c FROM Habits JOIN Categories on Habits.cID = Categories.cID WHERE Habits.uID =' + user + ' AND type =' + freq;
+  var insert = 'SELECT COUNT(*) as b FROM Habits JOIN Categories on Habits.cID = Categories.cID WHERE Habits.uID =' + user + ' AND type =' + freq;
   connection.query(insert, (err, rows) => {    if (err) throw err;
-    var habNum = rows[0].c.toString();
+    var habNum = rows[0].b.toString();
     res.json(habNum);
   })
 })
@@ -196,6 +196,11 @@ app.get('/api/getHabitConsistency', function(req, res){
   + ' UNION select count(*) as c from Habits natural join HabitInstance where uID = ' + user;
   connection.query(insert, (err, rows) => {
     if (err) throw err;
+    if (rows[1].c === undefined)
+    {
+      console.log('?');
+      res.json(0);
+    }
     if (rows[1].c == 0) res.json(0);
     else {
       var con = (rows[0].c) / rows[1].c;
@@ -211,9 +216,20 @@ app.get('/api/getHabitConsistencyByFreq', function(req, res){
   + ' UNION select count(*) as c from Habits natural join HabitInstance natural join Categories where type = ' + freq + ' and uID = ' + user;
   connection.query(insert, (err, rows) => {
     if (err) throw err;
-    if (rows[1].c == 0) res.json(0);
+    if (rows[1] === undefined)
+    {
+      res.json(1);
+    }
+    else if (rows[0].c == 0 && rows[1] === undefined)
+    {
+      res.json(0);
+    }
+    else if (rows[1].c == 0)
+    {
+      res.json(0);
+    }
     else {
-      var con = (rows[0].c) / rows[1].c;
+      var con = (rows[0].c / rows[1].c);
       res.json(con);
     }
   })

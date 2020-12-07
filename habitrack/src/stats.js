@@ -135,7 +135,7 @@ function getHabConTotal(uid){
   })
 }
 function getHabConDaily(uid){
-  let type = '\'Daily\''
+  let type = '\'Daily\'';
   let url = 'http://localhost:3001/api/getHabitConsistencyByFreq?tagId=' + uid + '&tagId2=' + type;
   fetch(url).then(function(response){
     return response.text();
@@ -147,7 +147,7 @@ function getHabConDaily(uid){
   })
 }
 function getHabConWeekly(uid){
-  let type = '\'Weekly\''
+  let type = '\'Weekly\'';
   let url = 'http://localhost:3001/api/getHabitConsistencyByFreq?tagId=' + uid + '&tagId2=' + type;
   fetch(url).then(function(response){
     return response.text();
@@ -159,7 +159,7 @@ function getHabConWeekly(uid){
   })
 }
 function getHabConMonthly(uid){
-  let type = '\'Monthly\''
+  let type = '\'Monthly\'';
   let url = 'http://localhost:3001/api/getHabitConsistencyByFreq?tagId=' + uid + '&tagId2=' + type;
   fetch(url).then(function(response){
     return response.text();
