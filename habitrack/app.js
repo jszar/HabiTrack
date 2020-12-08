@@ -247,15 +247,20 @@ app.get('/api/updateCheck', function(req, res){
   })  
 })
 
-//Transaction to count the total number of habits created amongst all users
-connection.beginTransaction(function(err){
-  if (err) { throw err; }
-  connection.query('SELECT count(*) FROM Habits Join Users ON Habits.uID = Users.uID', function(err, result) {
-    if (err) {
-      connection.rollback(function() { throw err; });
-    }
-    var total = JSON.stringify(result);
-    total = total.replace( /\D+/g, '');
-    console.log('Total Habits: ' + total);
+app.get('/api/runTransaction', function(req, res){
+  //Transaction to count the total number of habits created amongst all users
+  connection.beginTransaction(function(err){
+    if (err) { throw err; }
+    connection.query('SELECT count(*) FROM Habits Join Users ON Habits.uID = Users.uID', function(err, result) {
+      if (err) {
+        connection.rollback(function() { throw err; });
+      }
+      var total = JSON.stringify(result);
+      total = total.replace( /\D+/g, '');
+      let str = '\'' + total + '\'';
+      res.send(str);
+    })
   })
 })
+
+

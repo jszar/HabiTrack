@@ -14,6 +14,8 @@ getHabConTotal(uid);
 getHabConDaily(uid);
 getHabConWeekly(uid);
 getHabConMonthly(uid);
+getNumHabits();
+
 const catNumTotal = localStorage.getItem('catNumTotal');
 const catNumDaily = localStorage.getItem('catNumDaily');
 const catNumWeekly = localStorage.getItem('catNumWeekly');
@@ -26,6 +28,7 @@ const habConTotal = localStorage.getItem('habConTotal');
 const habConDaily = localStorage.getItem('habConDaily');
 const habConWeekly = localStorage.getItem('habConWeekly');
 const habConMonthly = localStorage.getItem('habConMonthly');
+const numHabits = localStorage.getItem('numHabits');
 //import './App.css';
 
 function getCatNumTotal(uid){
@@ -170,6 +173,18 @@ function getHabConMonthly(uid){
     console.error();
   })
 }
+function getNumHabits(){
+  let url = 'http://localhost:3001/api/runTransaction';
+  fetch(url).then(function(response){
+    return response.text();
+  }).then(function(data){
+    let num = data.substring(1, data.length-1);
+    //let res  = num.substring(num.indexOf('\'') +1);
+    localStorage.setItem('numHabits', num);
+  }).catch(function(error){
+    console.error();
+  })
+}
 
   class App extends Component {
     constructor() {
@@ -206,6 +221,9 @@ function getHabConMonthly(uid){
                   <h4>Consistency of Daily Habits: {habConDaily}%</h4>
                   <h4>Consistency of Weekly Habits: {habConWeekly}%</h4>
                   <h4>Consistency of Monthly Habits: {habConMonthly}%</h4>
+                  <hr></hr>
+                  <h3>PLATFORM STATS</h3>
+                  <h4>Number of Habits Created Across All Users: {numHabits}</h4>
             </div>
         );
     }
