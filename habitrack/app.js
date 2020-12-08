@@ -254,5 +254,8 @@ connection.beginTransaction(function(err){
     if (err) {
       connection.rollback(function() { throw err; });
     }
+    var total = JSON.stringify(result);
+    total = total.replace( /\D+/g, '');
+    console.log('Total Habits: ' + total);
   })
 })
