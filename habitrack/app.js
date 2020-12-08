@@ -246,3 +246,13 @@ app.get('/api/updateCheck', function(req, res){
     res.send('1');
   })  
 })
+
+//Transaction to count the total number of habits created amongst all users
+connection.beginTransaction(function(err){
+  if (err) { throw err; }
+  connection.query('SELECT count(*) FROM Habits Join Users ON Habits.uID = Users.uID', function(err, result) {
+    if (err) {
+      connection.rollback(function() { throw err; });
+    }
+  })
+})
